@@ -5,7 +5,7 @@
  * @since 2022/5/22
  */
 object Versions{
-    const val ktor = "1.6.3"
+    const val ktor = "2.0.0"
     const val serialization = "1.5.21"
     const val coroutines =  "1.5.0"
     object AndroidX {
@@ -24,6 +24,8 @@ object Develop{
         const val androidCore = "io.ktor:ktor-client-okhttp:${Versions.ktor}"
         const val ios = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val commonSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
+        const val jsonFacture = "io.ktor:ktor-serialization-kotlinx-json:${Versions.ktor}"
+        const val contentNegotiation = "io.ktor:ktor-client-content-negotiation:${Versions.ktor}"
     }
     object Coroutines{
         const val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"

@@ -30,6 +30,8 @@ kotlin {
                 implementation(Develop.Ktor.commonJson)
                 implementation(Develop.Ktor.commonLogging)
                 implementation(Develop.Ktor.commonSerialization)
+                implementation(Develop.Ktor.jsonFacture)
+                implementation(Develop.Ktor.contentNegotiation)
             }
         }
         val commonTest by getting {

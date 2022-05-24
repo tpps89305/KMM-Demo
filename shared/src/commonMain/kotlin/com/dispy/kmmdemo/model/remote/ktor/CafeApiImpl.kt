@@ -1,12 +1,14 @@
 package com.dispy.kmmdemo.model.remote.ktor
 
 import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
 
 /**
  * Created by Dispy-Yang on 2022/05/22
@@ -17,14 +19,12 @@ import io.ktor.http.*
 class CafeApiImpl : CafeApi {
     override suspend fun fetchCafeFromApi(city: String): List<CafeResponseItem> {
         println("fetching CafeList from Network ")
-        return client.get<List<CafeResponseItem>> {
-            getCafeListHttpBuilder(city)
-        }
+        return client.get("https://cafenomad.tw/api/v1.2/cafes/$city").body()
     }
 
     private val client = HttpClient {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(kotlinx.serialization.json.Json {
+        install(ContentNegotiation) {
+            json(Json {
                 ignoreUnknownKeys = true
             })
         }
