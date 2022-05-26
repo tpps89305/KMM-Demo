@@ -1,6 +1,7 @@
 package com.dispy.kmmdemo.android
 
 import androidx.lifecycle.*
+import com.dispy.kmmdemo.log.KMMLogger
 import com.dispy.kmmdemo.model.DataRepository
 import com.dispy.kmmdemo.model.remote.ktor.CafeResponseItem
 import kotlinx.coroutines.async
@@ -21,6 +22,7 @@ class MainViewModel : ViewModel() {
         viewModelScope.launch {
             val result = async { dataRepository.fetchCafesFromNetwork(city) }
             cafeList.value = result.await()
+            KMMLogger.i("MainViewModel", "Cafe in $city was got!")
         }
     }
 }
