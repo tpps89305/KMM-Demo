@@ -76,4 +76,5 @@ android {
         minSdk = 21
         targetSdk = 31
     }
+    namespace = "com.dispy.kmmdemo"
 }
