@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     private val dataRepository: DataRepository = DataRepository()
     private val cafeList = MutableLiveData<List<CafeResponseItem>>()
-    val cafeListLiveData: LiveData<List<CafeResponseItem>> = Transformations.map(cafeList) { it }
+    val cafeListLiveData: LiveData<List<CafeResponseItem>> = cafeList.map { each -> each }
 
     fun fetchCafeData(city: String = "") {
         viewModelScope.launch {

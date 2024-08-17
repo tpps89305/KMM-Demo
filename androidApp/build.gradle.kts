@@ -4,11 +4,10 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "com.dispy.kmmdemo.android"
-        minSdk = 21
-        targetSdk = 31
+        minSdk = libs.versions.android.minSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -17,18 +16,22 @@ android {
             isMinifyEnabled = false
         }
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
     namespace = "com.dispy.kmmdemo.android"
 }
 
 dependencies {
     implementation(project(":shared"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-    implementation(Develop.Ktor.androidCore)
-    implementation(Develop.Coroutines.common)
-    implementation(Develop.Coroutines.android)
-    implementation(Develop.AndroidX.lifecycle_runtime)
-    implementation(Develop.AndroidX.lifecycle_viewmodel)
-    implementation(Develop.AndroidX.lifecycle_viewmodel_extensions)
+    implementation(libs.material)
+    implementation(libs.appcompat)
+    implementation(libs.constraintlayout)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.lifecycle.runtime.ktx)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.lifecycle.viewmodel.ktx)
 }

@@ -26,12 +26,12 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(Develop.Ktor.commonCore)
-                implementation(Develop.Ktor.commonJson)
-                implementation(Develop.Ktor.commonLogging)
-                implementation(Develop.Ktor.commonSerialization)
-                implementation(Develop.Ktor.jsonFacture)
-                implementation(Develop.Ktor.contentNegotiation)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.json)
+                implementation(libs.ktor.client.logging)
+                implementation(libs.ktor.client.serialization)
+                implementation(libs.ktor.serialization.kotlinx.json)
+                implementation(libs.ktor.client.content.negotiation)
             }
         }
         val commonTest by getting {
@@ -41,10 +41,10 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation(Develop.Ktor.androidCore)
+                implementation(libs.ktor.client.okhttp)
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
@@ -54,7 +54,7 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation(Develop.Ktor.ios)
+                implementation(libs.ktor.client.ios)
             }
         }
         val iosX64Test by getting
@@ -70,11 +70,14 @@ kotlin {
 }
 
 android {
-    compileSdk = 31
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdk = 21
-        targetSdk = 31
+        minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     namespace = "com.dispy.kmmdemo"
 }
